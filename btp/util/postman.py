@@ -4,12 +4,7 @@ import uuid
 
 import requests
 
-TIMEOUT = 10
-PROXY = 'socks5://127.0.0.1:1086'
-PROXY_DICT = {
-    'https': PROXY,
-    'http': PROXY
-}
+from btp.util import req
 
 
 def __build_post_body(token, url_list):
@@ -26,9 +21,9 @@ def __build_post_body(token, url_list):
     }
 
 
-def push(aria2_jsonrpc_url, aria2_jsonrpc_token, url_list):
+def push(aria2_jsonrpc_url, aria2_jsonrpc_token, url_list, proxy=None):
     post_body = __build_post_body(aria2_jsonrpc_token, url_list)
-    resp = requests.post(aria2_jsonrpc_url, json=post_body, timeout=TIMEOUT, proxies=PROXY_DICT).json()
+    resp = requests.post(aria2_jsonrpc_url, json=post_body, proxies=req.build_proxies(proxy)).json()
     if resp and 'result' in resp and resp['result'] == 'OK':
         return True
     return False
