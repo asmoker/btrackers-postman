@@ -10,12 +10,9 @@ from setuptools import setup
 def read(file_name):
     return open(os.path.join(os.path.dirname(__file__), file_name)).read()
 
-
-requires = read('requirements.txt').split('\n')
-
 setup(
     name='btrackers-postman',
-    version='1.0.0',
+    version='1.0.1',
     packages=['btp', 'btp.util'],
     url='https://github.com/asmoker/btrackers-postman',
     license='Apache-2.0',
@@ -25,7 +22,7 @@ setup(
                 'https://github.com/ngosang/trackerslist and post to your aria2 server via jsonrpc.',
     keywords='BitTorrent Trackers aria2 trackerslist jsonrpc update post postman',
     long_description=read('README'),
-    install_requires=requires,
+    install_requires=read('requirements.txt').split('\n'),
     entry_points={
         'console_scripts': ['btp=btp.run:main'],
     },
