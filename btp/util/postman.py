@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Created by zhangminpeng on 01/11/2017.
+# Created by asmoker on 01/11/2017.
 import uuid
 
 import requests

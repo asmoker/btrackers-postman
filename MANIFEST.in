@@ -1,0 +1,5 @@
+recursive-include btp *.py
+include README
+include logo.png
+include LICENSE
+include requirements.txt

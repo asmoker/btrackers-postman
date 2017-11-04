@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Created by zhangminpeng on 01/11/2017.
+# Created by asmoker on 01/11/2017.
 
 TRACKERS_URL_LIST = [
     'https://raw.githubusercontent.com/ngosang/trackerslist/master/trackers_best.txt',  # trackers_best

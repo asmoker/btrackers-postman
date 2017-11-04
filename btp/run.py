@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# Created by zhangminpeng on 01/11/2017.
+# Created by asmoker on 01/11/2017.
 
 
-import importlib
 import argparse
+import importlib
 from argparse import RawTextHelpFormatter
 
 from btp.util import fetcher, postman
 
-trackers = importlib.import_module('util.trackers')
+trackers = importlib.import_module('btp.util.trackers')
 
 parser = argparse.ArgumentParser(
     prog='btp',
@@ -57,23 +57,28 @@ parser.add_argument(
     help='Request proxy, http proxy or socks proxy likes: \n'
          'http://user:password@10.1.1.6:8080 or socks5://127.0.0.1:1086'
 )
-args = parser.parse_args()
 
-url = trackers.get_trackers_url(args.index)
-try:
-    content = fetcher.get_trackers_content(url, proxy=args.proxy)
-    if content:
-        url_list = fetcher.parse_content(content)
-        if not url_list:
-            print('Tracker urls empty, more detail: https://github.com/ngosang/trackerslist')
-        else:
-            result = postman.push(args.jsonrpc_url, args.jsonrpc_token, url_list, proxy=args.proxy)
-            if result:
-                print('Success.')
+
+def main():
+    try:
+        args = parser.parse_args()
+        url = trackers.get_trackers_url(args.index)
+        try:
+            content = fetcher.get_trackers_content(url, proxy=args.proxy)
+            if content:
+                url_list = fetcher.parse_content(content)
+                if not url_list:
+                    print('Tracker urls empty, more detail: https://github.com/ngosang/trackerslist')
+                else:
+                    result = postman.push(args.jsonrpc_url, args.jsonrpc_token, url_list, proxy=args.proxy)
+                    if result:
+                        print('Success.')
+                    else:
+                        print('Failed to post urls to aria2 server.')
+
             else:
-                print('Failed to post urls to aria2 server.')
-
-    else:
-        print('Failed to get tracker urls from github.')
-except Exception as e:
-    print('Exception, please try again later:\n    %s' % str(e))
+                print('Failed to get tracker urls from github.')
+        except Exception as e:
+            print('Exception, please try again later:\n    %s' % str(e))
+    except:
+        pass
