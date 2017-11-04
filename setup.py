@@ -21,7 +21,7 @@ setup(
     description='BitTorrent Trackers Postman, fetch BitTorrent Trackers URL list from '
                 'https://github.com/ngosang/trackerslist and post to your aria2 server via jsonrpc.',
     keywords='BitTorrent Trackers aria2 trackerslist jsonrpc update post postman',
-    long_description=read('README'),
+    long_description=read('README.md'),
     install_requires=read('requirements.txt').split('\n'),
     entry_points={
         'console_scripts': ['btp=btp.run:main'],
